@@ -3,9 +3,8 @@ const generateWebAppURL = require('server/utils').generateWebAppURL
 
 module.exports = (app) => {
 
-    app.get('/search/movie', (req, res) => {
-        const { keywords, page } = req.body
-        const apiUrl = generateWebAppURL({ keywords, page })
+    app.get('/movie/popular', (req, res) => {
+        const apiUrl = generateWebAppURL()
 
         console.log('apiUrl', apiUrl)
 
