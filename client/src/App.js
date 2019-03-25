@@ -23,8 +23,15 @@ class App extends Component {
     componentDidMount = () => {
         fetch('/popular')
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(({ results, page, total_pages }) => {
+                this.setState(() => ({
+                    movies: results,
+                    currentPage: page - 1,
+                    pages: total_pages > 1000 ?
+                        1000 : total_pages,
+                    resultsMsg: !results.length ?
+                        'Your search did not match any movie titles.' : null
+                }))
             })
     }
 
