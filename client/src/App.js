@@ -2,6 +2,9 @@
 import React, { Component } from 'react'
 // Styles
 import './App.css'
+// Dependencies
+import _debounce from 'lodash/debounce'
+// import ReactPaginate from 'react-paginate'
 
 const initialState = {
     text: '',
@@ -12,20 +15,34 @@ class App extends Component {
     state = {...initialState}
 
     componentDidMount = () => {
-        fetch('/search/movie')
+        fetch('/popular')
             .then(res => res.json())
             .then(data => {
                 console.log(data)
             })
     }
 
-    handleTextChange = () => {
-
+    fetchMovies = () => {
+        
     }
 
-    handleClear = () => {
+    handleClear = () => this.setState(() => initialState)
 
-    }
+    handleSearch = _debounce(text => {
+        if (!text) {
+            this.handleClear()
+        } else {
+            this.fetchMovies(text)
+        }
+    }, 175) // more? less?
+
+    handleTextChange = ({ target }) => this.setState(() => ({ 
+        text: target.value
+    }), () => this.handleSearch(target.value))
+
+    // handlePageChange = ({ selected }) => {
+    //     this.fetchMovies(this.state.text, selected + 1)
+    // }
 
     render() {
         const { text } = this.state

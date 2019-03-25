@@ -10,7 +10,7 @@ module.exports = (app) => {
         fetch(apiUrl)
             .then(res => res.json())
             .then(data => {
-                res.send({ data })
+                res.send(data)
             })
             .catch(err => {
                 res.redirect('/error')
