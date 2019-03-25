@@ -51,12 +51,11 @@
 	display: flex;
 	flex-wrap: wrap;
 	font-size: 0.9rem;
-	margin-top: 0.35rem;
 }
 
 .Movie > .__details > .genre > div {
 	border: 1px solid #CCCCCC;
-	margin-right: 0.25rem;
+	margin: 0.35rem 0.25rem 0 0;
 	padding: 0 0.25rem;
 }
 
