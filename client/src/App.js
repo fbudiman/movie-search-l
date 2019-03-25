@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // Styles
 import './App.css'
 // Components
-import Movie from './components/Movie/Movie'
+import MovieResult from './components/MovieResult/MovieResult'
 // Dependencies
 import _debounce from 'lodash/debounce'
 import ReactPaginate from 'react-paginate'
@@ -113,7 +113,7 @@ class App extends Component {
 
                 {!!resultsMsg ?
                     <div className="__no-results">{resultsMsg}</div> :
-                    movies.map(movie => <Movie
+                    movies.map(movie => <MovieResult
                         key={movie.id}
                         movie={movie}
                     />)

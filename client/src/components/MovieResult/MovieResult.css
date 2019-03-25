@@ -1,0 +1,42 @@
+.MovieResult {
+	display: flex;
+	width: 75%;
+	margin: 1rem auto;
+	padding: 1rem;
+	border: 1px solid #CCCCCC;
+}
+
+.__poster > img {
+	width: 125px;
+}
+
+.__poster > .--unavailable {
+	width: 123px;
+	height: 186.5px;
+	border: 1px solid #9B9B9B;
+	font-size: 0.925rem;
+	display: flex;
+	align-items: center;
+}
+
+.__details {
+	flex: 1;
+	text-align: left;
+	padding: 0 1rem;
+}
+
+.__details > .title {
+	font-size: 1.25rem;
+	margin-bottom: 0.25rem;
+}
+
+.__details > .date,
+.__details > .rating {
+	color: #5B5B5B;
+	font-size: 0.925rem;
+}
+
+.__details > .summary {
+	font-size: 0.825rem;
+	margin-top: 1rem;
+}
