@@ -29,8 +29,6 @@ class Movie extends React.Component {
 	}
 
   	render() {
-  		console.log(this.state.movie)
-
   		const {
   			poster_path,
   			title,

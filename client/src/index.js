@@ -10,8 +10,6 @@ import './index.css'
 // Service
 import * as serviceWorker from './serviceWorker'
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-
 const routing = (
   	<Router>
     	<div>
