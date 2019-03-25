@@ -1,9 +1,13 @@
+// React
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-import './index.css'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+// Components
 import App from './App'
 import Movie from './components/Movie/Movie'
+// Styles
+import './index.css'
+// Service
 import * as serviceWorker from './serviceWorker'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -11,8 +15,8 @@ import * as serviceWorker from './serviceWorker'
 const routing = (
   	<Router>
     	<div>
-      		<Route path="/" component={App} />
-      		<Route path="/movie" component={Movie} />
+      		<Route exact path="/" component={App} />
+      		<Route path="/movie/:id" component={Movie} />
     	</div>
   	</Router>
 )

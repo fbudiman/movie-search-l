@@ -6,17 +6,10 @@ import './Movie.css'
 // Dependencies
 import moment from 'moment'
 
-// const base = 'https://image.tmdb.org/t/p/w200'
-
-const Movie = ({ movie }) => {
-
-	return (
-		<div>MOVIE PAGE</div>
-	)
-}
-
-Movie.propTypes = {
-	movie: PropTypes.object.isRequired
+class Movie extends React.Component {
+  	render() {
+    	return <div>MOVIE PAGE {this.props.match.params.id}</div>
+  	}
 }
 
 export default Movie
