@@ -57,6 +57,11 @@
     border-color: #000;
 }
 
+.App > .__results {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .App > .__no-results {
     margin-top: 2rem;
 }

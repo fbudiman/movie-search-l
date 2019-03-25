@@ -1,22 +1,35 @@
 .MovieResult {
-	display: flex;
-	width: 75%;
-	margin: 1rem auto;
-	padding: 1rem;
-	border: 1px solid #CCCCCC;
+	margin: 1.25rem;
+	flex: 1;
+}
+
+.MovieResult > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.__poster {
+	transition: opacity 250ms ease-out;
+}
+
+.__poster:hover {
+	opacity: 0.6;
 }
 
 .__poster > img {
-	width: 125px;
+	width: 150px;
+	height: 225px;
 }
 
 .__poster > .--unavailable {
-	width: 123px;
-	height: 186.5px;
+	width: 148px;
+	height: 225px;
 	border: 1px solid #9B9B9B;
+	margin: 0 auto;
 	font-size: 0.925rem;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
 .__details {

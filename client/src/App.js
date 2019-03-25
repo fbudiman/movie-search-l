@@ -113,10 +113,12 @@ class App extends Component {
 
                 {!!resultsMsg ?
                     <div className="__no-results">{resultsMsg}</div> :
-                    movies.map(movie => <MovieResult
-                        key={movie.id}
-                        movie={movie}
-                    />)
+                    <div className="__results">
+                        {movies.map(movie => <MovieResult
+                            key={movie.id}
+                            movie={movie}
+                        />)}
+                    </div>
                 }
 
                 {pages > 1 &&

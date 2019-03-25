@@ -12,25 +12,14 @@ const base = 'https://image.tmdb.org/t/p/w200'
 const MovieResult = ({ movie }) => {
 
 	const {
+		id,
 		title,
-		poster_path,
-		release_date,
-		vote_average,
-		vote_count,
-		overview
+		poster_path
 	} = movie
-
-	const ratingsMsg = !vote_average && !vote_count ?
-		'No Ratings.' :
-		`Rated ${vote_average}/10 from ${vote_count.toLocaleString()} ${vote_count === 1 ? 'Review' : 'Reviews'}`
-
-	const releaseDateMsg = !!release_date ?
-		`Released ${moment(release_date).format('MMMM Do, YYYY')}` :
-		'Release date unavailable.'
 
 	return (
 		<div className="MovieResult" title={title}>
-			<Link to={`/movie/${movie.id}`}>
+			<Link to={`/movie/${id}`}>
 				<div className="__poster">
 					{!!poster_path ? 
 						<img src={base + poster_path} alt="Movie Poster" /> :
@@ -38,6 +27,7 @@ const MovieResult = ({ movie }) => {
 					}
 				</div>
 			</Link>
+			<div>{title}</div>
 		</div>
 	)
 }
