@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 // Styles
 import './MovieResult.css'
-// Dependencies
-import moment from 'moment'
 
 const base = 'https://image.tmdb.org/t/p/w200'
 

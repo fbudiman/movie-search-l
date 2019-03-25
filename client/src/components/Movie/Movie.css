@@ -1,3 +1,77 @@
 .Movie {
-	
+	display: flex;
+	width: 70%;
+	margin: 2rem auto;
+	max-height: 90vh;
+}
+
+.Movie > .__details,
+.Movie > .__poster {
+	flex: 1;
+	padding: 1rem;
+}
+
+.Movie > .__poster {
+	text-align: right;
+}
+
+.Movie > .__poster > img {
+	width: 100%;
+	max-height: 90vh;
+}
+
+.Movie > .__poster > div {
+	text-align: center;
+	position: relative;
+	top: 45%;
+}
+
+.Movie > .__details {
+	flex: 1;
+	text-align: left;
+}
+
+.Movie > .__details > .title {
+	margin-bottom: 0.25rem;
+}
+
+.Movie > .__details > .tagline {
+	font-style: italic;
+	font-size: 1.2rem;
+	margin-bottom: 0.35rem;
+}
+
+.Movie > .__details > .date,
+.Movie > .__details > .rating {
+	color: #5B5B5B;
+	font-size: 0.925rem;
+}
+
+.Movie > .__details > .genre {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 0.9rem;
+	margin-top: 0.35rem;
+}
+
+.Movie > .__details > .genre > div {
+	border: 1px solid #CCCCCC;
+	margin-right: 0.25rem;
+	padding: 0 0.25rem;
+}
+
+.Movie > .__details > .summary {
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid #CCCCCC;
+}
+
+.Movie > .__details > .production {
+	font-size: 0.925rem;
+	line-height: 1.25rem;
+	margin-top: 2rem;
+}
+
+.Movie > .__details > .production > div:first-child {
+	font-weight: bold;
 }
