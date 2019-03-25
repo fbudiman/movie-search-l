@@ -21,22 +21,13 @@ class App extends Component {
     state = {...initialState}
 
     componentDidMount = () => {
-        fetch('/popular')
-            .then(res => res.json())
-            .then(({ results, page, total_pages }) => {
-                this.setState(() => ({
-                    movies: results,
-                    currentPage: page - 1,
-                    pages: total_pages > 1000 ?
-                        1000 : total_pages,
-                    resultsMsg: !results.length ?
-                        'Your search did not match any movie titles.' : null
-                }))
-            })
+        this.fetchMovies()
     }
 
-    fetchMovies = (text, pageNum=1) => {
-        const url = `/search?keywords=${text}&page=${pageNum}`
+    fetchMovies = (text='', pageNum=1) => {
+        const url = !text ?
+            `/popular?page=${pageNum}` :
+            `/search?keywords=${text}&page=${pageNum}`
 
         fetch(url)
             .then(res => res.json())
@@ -52,7 +43,7 @@ class App extends Component {
             })
     }
 
-    handleClear = () => this.setState(() => initialState)
+    handleClear = () => this.setState(() => initialState, this.fetchMovies)
 
     handleSearch = _debounce(text => {
         if (!text) {
