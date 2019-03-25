@@ -6,7 +6,7 @@ import './App.css'
 import Movie from './components/Movie/Movie'
 // Dependencies
 import _debounce from 'lodash/debounce'
-// import ReactPaginate from 'react-paginate'
+import ReactPaginate from 'react-paginate'
 
 const initialState = {
     text: '',
@@ -59,9 +59,22 @@ class App extends Component {
         text: target.value
     }), () => this.handleSearch(target.value))
 
-    // handlePageChange = ({ selected }) => {
-    //     this.fetchMovies(this.state.text, selected + 1)
-    // }
+    handlePageChange = ({ selected }) => {
+        this.fetchMovies(this.state.text, selected + 1)
+    }
+
+    renderPaginate = () => <ReactPaginate
+        previousLabel={'Prev'}
+        nextLabel={'Next'}
+        breakLabel={'...'}
+        pageCount={this.state.pages}
+        forcePage={this.state.currentPage}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={8}
+        onPageChange={this.handlePageChange}
+        containerClassName={'__pagination'}
+        activeClassName={'--active'}
+    />
 
     render() {
         const { 
@@ -87,6 +100,10 @@ class App extends Component {
                     </span>
                 </div>
 
+                {pages > 1 &&
+                    this.renderPaginate()
+                }
+
                 {!!resultsMsg ?
                     <div className="__no-results">{resultsMsg}</div> :
                     movies.map(movie => <Movie
@@ -95,6 +112,9 @@ class App extends Component {
                     />)
                 }
 
+                {pages > 1 &&
+                    this.renderPaginate()
+                }
             </div>
         )
     }

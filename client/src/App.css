@@ -26,3 +26,37 @@
 .App > .__search-input > span:hover {
     border-color: #7F7F7F;
 }
+
+.App > .__pagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    width: 50%;
+    margin: 2rem auto;
+    cursor: pointer;
+    font-size: 0.925rem;
+}
+
+.App > .__pagination > li {
+    flex-basis: 40px;
+    border-bottom: 2px solid #DBDBDB;
+    transition: border 250ms ease-out;
+}
+
+.App > .__pagination > li > a {
+    display: block;
+    padding-bottom: 0.65rem;
+}
+
+.App > .__pagination > li:hover {
+    border-color: #7F7F7F;
+}
+
+.App > .__pagination > li.--active {
+    border-color: #000;
+}
+
+.App > .__no-results {
+    margin-top: 1rem;
+}
