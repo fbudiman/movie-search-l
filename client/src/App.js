@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// React
+import React, { Component } from 'react'
+// Styles
+import './App.css'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+const initialState = {
+    text: '',
 }
 
-export default App;
+class App extends Component {
+
+    state = {...initialState}
+
+    handleTextChange = () => {
+
+    }
+
+    handleClear = () => {
+
+    }
+
+    render() {
+        const { text } = this.state
+
+        return (
+            <div className="App">
+                <h2>Movie Search</h2>
+
+                <div className="__search-input">
+                    <input
+                        type="text"
+                        placeholder="Movie Titles..."
+                        value={text}
+                        onChange={this.handleTextChange}
+                    />
+                    <span onClick={this.handleClear}>
+                        Clear
+                    </span>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default App
