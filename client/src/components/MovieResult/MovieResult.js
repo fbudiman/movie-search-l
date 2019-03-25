@@ -1,6 +1,7 @@
 // React
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 // Styles
 import './MovieResult.css'
 // Dependencies
@@ -29,26 +30,14 @@ const MovieResult = ({ movie }) => {
 
 	return (
 		<div className="MovieResult" title={title}>
-			<div className="__poster">
-				{!!poster_path ? 
-					<img src={base + poster_path} alt="Movie Poster" /> :
-					<div className="--unavailable">Poster Unavailable</div>
-				}
-			</div>
-			<div className="__details">
-				<div className="title">
-					{title}
+			<Link to={`/movie/${movie.id}`}>
+				<div className="__poster">
+					{!!poster_path ? 
+						<img src={base + poster_path} alt="Movie Poster" /> :
+						<div className="--unavailable">Poster Unavailable</div>
+					}
 				</div>
-				<div className="date">
-					{releaseDateMsg}
-				</div>
-				<div className="rating">
-					{ratingsMsg}
-				</div>
-				<div className="summary">
-					{overview}
-				</div>
-			</div>
+			</Link>
 		</div>
 	)
 }
