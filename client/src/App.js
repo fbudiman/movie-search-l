@@ -2,12 +2,18 @@
 import React, { Component } from 'react'
 // Styles
 import './App.css'
+// Components
+import Movie from './components/Movie/Movie'
 // Dependencies
 import _debounce from 'lodash/debounce'
 // import ReactPaginate from 'react-paginate'
 
 const initialState = {
     text: '',
+    movies: [],
+    pages: 0,
+    currentPage: 0,
+    resultsMsg: null
 }
 
 class App extends Component {
@@ -22,8 +28,21 @@ class App extends Component {
             })
     }
 
-    fetchMovies = () => {
-        
+    fetchMovies = (text, pageNum=1) => {
+        const url = `/search?keywords=${text}&page=${pageNum}`
+
+        fetch(url)
+            .then(res => res.json())
+            .then(({ results, page, total_pages }) => {
+                this.setState(() => ({
+                    movies: results,
+                    currentPage: page - 1,
+                    pages: total_pages > 1000 ?
+                        1000 : total_pages,
+                    resultsMsg: !results.length ?
+                        'Your search did not match any movie titles.' : null
+                }))
+            })
     }
 
     handleClear = () => this.setState(() => initialState)
@@ -45,7 +64,12 @@ class App extends Component {
     // }
 
     render() {
-        const { text } = this.state
+        const { 
+            text, 
+            movies,
+            pages,
+            resultsMsg
+        } = this.state
 
         return (
             <div className="App">
@@ -62,6 +86,15 @@ class App extends Component {
                         Clear
                     </span>
                 </div>
+
+                {!!resultsMsg ?
+                    <div className="__no-results">{resultsMsg}</div> :
+                    movies.map(movie => <Movie
+                        key={movie.id}
+                        movie={movie}
+                    />)
+                }
+
             </div>
         )
     }
