@@ -11,6 +11,14 @@ class App extends Component {
 
     state = {...initialState}
 
+    componentDidMount = () => {
+        fetch('/search/movie')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
     handleTextChange = () => {
 
     }
