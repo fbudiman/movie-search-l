@@ -7,35 +7,59 @@ import {
 } from '../../services/movie'
 // Styles
 import './Movie.css'
+// Components
+import MovieResult from '../MovieResult/MovieResult'
 // Dependencies
 import moment from 'moment'
 import _isEmpty from 'lodash/isEmpty'
 
 const base = 'https://image.tmdb.org/t/p/w500'
 
+const initialState = {
+	movie: {},
+	similarMovies: [],
+	viewSimilar: false
+}
+
 class Movie extends React.Component {
 
-	state = {
-		movie: {},
-		similarMovies: []
-	}
+	state = {...initialState}
 
 	componentDidMount = () => {
 		const id = this.props.match.params.id
 
-		this.fetchAll(id)
+		this.fetchMovie(id)
 	}
 
-	fetchAll = id => {
-		Promise.all([
-			getMovie(id),
-			getSimilar(id)
-		])
-			.then(([ movie, similarMovies ]) => this.setState(() => ({
-				movie,
-				similarMovies
+	componentDidUpdate = prevProps => {
+		const { id } = this.props.match.params
+
+		if (prevProps.match.params.id !== id) {
+			this.setState(() => initialState, () => this.fetchMovie(id))
+		}
+	}
+
+	fetchMovie = id => {
+		getMovie(id)
+			.then(movie => this.setState(() => ({
+				movie
 			})))
 	}
+
+	fetchSimilar = () => {
+		if (!this.state.similarMovies.length) {
+			const id = this.props.match.params.id
+
+			getSimilar(id)
+				.then(({ results }) => this.setState(() => ({
+					similarMovies: results
+				})))
+		}
+	}
+
+	toggleSimilar = () => this.setState(prevState => ({
+		viewSimilar: !prevState.viewSimilar
+	}), this.fetchSimilar)
 
   	render() {
   		const {
@@ -50,7 +74,10 @@ class Movie extends React.Component {
   			production_companies
   		} = this.state.movie
 
-  		console.log(this.state.similarMovies)
+  		const {
+  			viewSimilar,
+  			similarMovies
+  		} = this.state
 
   		const ratingsMsg = !vote_average && !vote_count ?
 			'No Ratings.' :
@@ -64,10 +91,36 @@ class Movie extends React.Component {
 			base + poster_path :
 			''
 
+		document.body.style.overflow = !!viewSimilar ?
+			'hidden' :
+			'auto'
+
     	return (
     		<div className="Movie">
+
+    			{!!viewSimilar &&
+    				<div 
+    					className="__similar"
+    					onClick={this.toggleSimilar}
+    				>
+    					<div className="__container">
+	    					{similarMovies.map(movie => <MovieResult
+	                            key={movie.id}
+	                            movie={movie}
+	                        />)}
+						</div>
+    				</div>
+    			}
+
+	    		<div 
+	    			className="__button" 
+	    			onClick={this.toggleSimilar}
+	    		>
+	    			View similar movies
+	    		</div>
+
     			{!_isEmpty(this.state.movie) &&
-    				<React.Fragment>
+    				<div className="__body">
 		    			<div className="__poster">
 							{!!source ?
 		    					<img src={source} alt="Movie Poster" /> :
@@ -105,7 +158,7 @@ class Movie extends React.Component {
 								}
 							</div>
 						</div>
-					</React.Fragment>
+					</div>
 				}
     		</div>
     	)

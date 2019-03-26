@@ -15,9 +15,11 @@ const MovieResult = ({ movie }) => {
 		poster_path
 	} = movie
 
+	const stopProp = e => e.stopPropagation()
+
 	return (
 		<div className="MovieResult" title={title}>
-			<Link to={`/movie/${id}`}>
+			<Link to={`/movie/${id}`} onClick={e => stopProp(e)}>
 				<div className="__poster">
 					{!!poster_path ? 
 						<img src={base + poster_path} alt="Movie Poster" /> :
