@@ -1,5 +1,10 @@
 // React
 import React, { Component } from 'react'
+// Services
+import {
+    searchMovies,
+    searchPopular
+} from './services/movie'
 // Styles
 import './App.css'
 // Components
@@ -25,12 +30,16 @@ class App extends Component {
     }
 
     fetchMovies = (text='', pageNum=1) => {
-        const url = !text ?
-            `/popular?page=${pageNum}` :
-            `/search?keywords=${text}&page=${pageNum}`
+        const search = !text ?
+            searchPopular :
+            searchMovies
 
-        fetch(url)
-            .then(res => res.json())
+        const searchData = {
+            keywords: text,
+            page: pageNum
+        }
+
+        search(searchData)
             .then(({ results, page, total_pages }) => {
                 this.setState(() => ({
                     movies: results,

@@ -1,5 +1,10 @@
 // React
 import React from 'react'
+// Services
+import { 
+	getMovie,
+	getSimilar
+} from '../../services/movie'
 // Styles
 import './Movie.css'
 // Dependencies
@@ -11,20 +16,24 @@ const base = 'https://image.tmdb.org/t/p/w500'
 class Movie extends React.Component {
 
 	state = {
-		movie: {}
+		movie: {},
+		similarMovies: []
 	}
 
 	componentDidMount = () => {
 		const id = this.props.match.params.id
 
-		this.fetchMovie(id)
+		this.fetchAll(id)
 	}
 
-	fetchMovie = id => {
-		fetch(`/movie?id=${id}`)
-			.then(res => res.json())
-			.then(movie => this.setState(() => ({
-				movie
+	fetchAll = id => {
+		Promise.all([
+			getMovie(id),
+			getSimilar(id)
+		])
+			.then(([ movie, similarMovies ]) => this.setState(() => ({
+				movie,
+				similarMovies
 			})))
 	}
 
@@ -40,6 +49,8 @@ class Movie extends React.Component {
   			genres,
   			production_companies
   		} = this.state.movie
+
+  		console.log(this.state.similarMovies)
 
   		const ratingsMsg = !vote_average && !vote_count ?
 			'No Ratings.' :
