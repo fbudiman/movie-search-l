@@ -117,12 +117,11 @@ class App extends Component {
             includeGenres
         } = this.state
 
-        console.log(includeGenres)
-        console.log(movies)
-        
         const moviesByGenre = !includeGenres.length ?
             movies :
             movies.filter(({ genre_ids }) => genre_ids.some(id => includeGenres.includes(id)))
+
+        document.body.style.overflow = 'auto'
 
         return (
             <div className="App">

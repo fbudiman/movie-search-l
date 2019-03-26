@@ -1,6 +1,6 @@
 .MovieResult {
 	margin: 1.25rem;
-	flex: 1;
+	flex: 0;
 }
 
 .MovieResult > a {
