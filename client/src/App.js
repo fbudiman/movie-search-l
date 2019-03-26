@@ -31,6 +31,10 @@ class App extends Component {
     state = {...initialState}
 
     componentDidMount = () => {
+        this.fetchAll()
+    }
+
+    fetchAll = () => {
         this.fetchGenres()
         this.fetchMovies()
     }
@@ -65,7 +69,7 @@ class App extends Component {
             })
     }
 
-    handleClear = () => this.setState(() => initialState, this.fetchMovies)
+    handleClear = () => this.setState(() => initialState, this.fetchAll)
 
     handleSearch = _debounce(text => {
         if (!text) {
