@@ -17,13 +17,13 @@
 
 .App > .__genres > div {
     padding: 0.15rem 0.5rem;
-    border: 1px solid #000;
+    border: 1px solid #CCCCCC;
     margin: 0.2rem;
     cursor: pointer;
 }
 
-.App > .__genres > div.inactive {
-    border-color: #CCCCCC;
+.App > .__genres > div.active {
+    border-color: #000;
 }
 
 .App > .__search-input > input {

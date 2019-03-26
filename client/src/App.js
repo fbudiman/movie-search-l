@@ -23,7 +23,7 @@ const initialState = {
     currentPage: 0,
     resultsMsg: null,
     genres: [],
-    excludeGenres: []
+    includeGenres: []
 }
 
 class App extends Component {
@@ -84,13 +84,13 @@ class App extends Component {
     }
 
     handleFilter = id => {
-        let { excludeGenres } = _cloneDeep(this.state)
-        excludeGenres.includes(id) ?
-            _pull(excludeGenres, id) :
-            excludeGenres.push(id)
+        let { includeGenres } = _cloneDeep(this.state)
+        includeGenres.includes(id) ?
+            _pull(includeGenres, id) :
+            includeGenres.push(id)
 
         this.setState(() => ({
-            excludeGenres
+            includeGenres
         }))
     }
 
@@ -114,10 +114,15 @@ class App extends Component {
             pages,
             resultsMsg,
             genres,
-            excludeGenres
+            includeGenres
         } = this.state
+
+        console.log(includeGenres)
+        console.log(movies)
         
-        const moviesByGenre = movies.filter(({ genre_ids }) => !genre_ids.every(id => excludeGenres.includes(id)))
+        const moviesByGenre = !includeGenres.length ?
+            movies :
+            movies.filter(({ genre_ids }) => genre_ids.some(id => includeGenres.includes(id)))
 
         return (
             <div className="App">
@@ -137,7 +142,7 @@ class App extends Component {
 
                 <div className="__genres">
                     {genres.map(genre => <div 
-                        className={excludeGenres.includes(genre.id) ? 'inactive' : ''}
+                        className={includeGenres.includes(genre.id) ? 'active' : ''}
                         key={genre.id}
                         onClick={() => this.handleFilter(genre.id)}>
                             {genre.name}
