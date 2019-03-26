@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 // Services
 import {
     searchMovies,
-    searchPopular
+    searchPopular,
+    getGenres
 } from './services/movie'
 // Styles
 import './App.css'
@@ -11,6 +12,8 @@ import './App.css'
 import MovieResult from './components/MovieResult/MovieResult'
 // Dependencies
 import _debounce from 'lodash/debounce'
+import _cloneDeep from 'lodash/cloneDeep'
+import _pull from 'lodash/pull'
 import ReactPaginate from 'react-paginate'
 
 const initialState = {
@@ -18,7 +21,9 @@ const initialState = {
     movies: [],
     pages: 0,
     currentPage: 0,
-    resultsMsg: null
+    resultsMsg: null,
+    genres: [],
+    excludeGenres: []
 }
 
 class App extends Component {
@@ -26,7 +31,15 @@ class App extends Component {
     state = {...initialState}
 
     componentDidMount = () => {
+        this.fetchGenres()
         this.fetchMovies()
+    }
+
+    fetchGenres = () => {
+        getGenres()
+            .then(({ genres }) => this.setState(() => ({
+                genres
+            })))
     }
 
     fetchMovies = (text='', pageNum=1) => {
@@ -70,6 +83,17 @@ class App extends Component {
         this.fetchMovies(this.state.text, selected + 1)
     }
 
+    handleFilter = id => {
+        let { excludeGenres } = _cloneDeep(this.state)
+        excludeGenres.includes(id) ?
+            _pull(excludeGenres, id) :
+            excludeGenres.push(id)
+
+        this.setState(() => ({
+            excludeGenres
+        }))
+    }
+
     renderPaginate = () => <ReactPaginate
         previousLabel={'Prev'}
         nextLabel={'Next'}
@@ -88,8 +112,12 @@ class App extends Component {
             text, 
             movies,
             pages,
-            resultsMsg
+            resultsMsg,
+            genres,
+            excludeGenres
         } = this.state
+        
+        const moviesByGenre = movies.filter(({ genre_ids }) => !genre_ids.every(id => excludeGenres.includes(id)))
 
         return (
             <div className="App">
@@ -107,6 +135,16 @@ class App extends Component {
                     </span>
                 </div>
 
+                <div className="__genres">
+                    {genres.map(genre => <div 
+                        className={excludeGenres.includes(genre.id) ? 'inactive' : ''}
+                        key={genre.id}
+                        onClick={() => this.handleFilter(genre.id)}>
+                            {genre.name}
+                        </div>
+                    )}
+                </div>
+
                 {pages > 1 &&
                     this.renderPaginate()
                 }
@@ -114,7 +152,7 @@ class App extends Component {
                 {!!resultsMsg ?
                     <div className="__no-results">{resultsMsg}</div> :
                     <div className="__results">
-                        {movies.map(movie => <MovieResult
+                        {moviesByGenre.map(movie => <MovieResult
                             key={movie.id}
                             movie={movie}
                         />)}

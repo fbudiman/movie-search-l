@@ -23,3 +23,9 @@ export const getSimilar = id => axios.get(`/similar?id=${id}`)
 	.catch(err => {
 		console.log(err)
 	})
+
+export const getGenres = () => axios.get('/genres')
+	.then(({ data}) => data)
+	.catch(err => {
+		console.log(err)
+	})

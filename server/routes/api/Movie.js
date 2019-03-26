@@ -63,4 +63,18 @@ module.exports = (app) => {
             })
     })
 
+    app.get('/genres', (req, res) => {
+    	const path = '/genre/movie/list'
+    	const apiUrl = generateWebAppURL({ path })
+
+    	fetch(apiUrl)
+    		.then(res => res.json())
+    		.then(data => {
+    			res.send(data)
+    		})
+    		.catch(err => {
+                res.redirect('/error')
+            })
+    })
+
 }

@@ -8,6 +8,24 @@
     outline: 0;
 }
 
+.App > .__genres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 5rem;
+}
+
+.App > .__genres > div {
+    padding: 0.15rem 0.5rem;
+    border: 1px solid #000;
+    margin: 0.2rem;
+    cursor: pointer;
+}
+
+.App > .__genres > div.inactive {
+    border-color: #CCCCCC;
+}
+
 .App > .__search-input > input {
     width: 50%;
     height: 1.25rem;
@@ -58,7 +76,6 @@
 }
 
 .App > .__results {
-    margin: 1rem 0;
     display: flex;
     flex-wrap: wrap;
 }
