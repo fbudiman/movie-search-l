@@ -36,6 +36,31 @@
 	max-width: 70%;
 }
 
+.Movie > .__similar-movies {
+	display: flex;
+}
+
+.Movie > .__reviews {
+	margin: 2rem;
+}
+
+.Movie > .__reviews > .__review {
+	margin-bottom: 1.5rem;
+}
+
+.Movie > .__credits img {
+	width: 150px;
+}
+
+.Movie > .__credits > .__container > .__cast {
+	display: flex;
+}
+
+.Movie > .__credits > .__container > .__cast > div {
+	flex: 0;
+	margin: 1rem;
+}
+
 .Movie > .__body > .__details,
 .Movie > .__body > .__poster {
 	flex: 1;

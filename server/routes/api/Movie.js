@@ -77,4 +77,34 @@ module.exports = (app) => {
             })
     })
 
+    app.get('/reviews', (req, res) => {
+        const { id } = req.query
+        const path = `/movie/${id}/reviews`
+        const apiUrl = generateWebAppURL({ path })
+
+        fetch(apiUrl)
+            .then(res => res.json())
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.redirect('/error')
+            })
+    })
+
+    app.get('/credits', (req, res) => {
+        const { id } = req.query
+        const path = `/movie/${id}/credits`
+        const apiUrl = generateWebAppURL({ path })
+
+        fetch(apiUrl)
+            .then(res => res.json())
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.redirect('/error')
+            })
+    })
+
 }

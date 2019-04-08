@@ -29,3 +29,15 @@ export const getGenres = () => axios.get('/genres')
 	.catch(err => {
 		console.log(err)
 	})
+
+export const getReviews = id => axios.get(`/reviews?id=${id}`)
+	.then(({ data }) => data)
+	.catch(err => {
+		console.log(err)
+	})
+
+export const getCredits = id => axios.get(`/credits?id=${id}`)
+	.then(({ data }) => data)
+	.catch(err => {
+		console.log(err)
+	})

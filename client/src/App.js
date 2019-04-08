@@ -15,12 +15,13 @@ import _debounce from 'lodash/debounce'
 import _cloneDeep from 'lodash/cloneDeep'
 import _pull from 'lodash/pull'
 import ReactPaginate from 'react-paginate'
+import InfiniteScroll from 'react-infinite-scroller'
 
 const initialState = {
     text: '',
     movies: [],
     pages: 0,
-    currentPage: 0,
+    currentPage: 1,
     resultsMsg: null,
     genres: [],
     includeGenres: []
@@ -47,6 +48,8 @@ class App extends Component {
     }
 
     fetchMovies = (text='', pageNum=1) => {
+        console.log('fetching movies')
+
         const search = !text ?
             searchPopular :
             searchMovies
@@ -56,11 +59,13 @@ class App extends Component {
             page: pageNum
         }
 
+        console.log('searchData', searchData)
+
         search(searchData)
             .then(({ results, page, total_pages }) => {
-                this.setState(() => ({
-                    movies: results,
-                    currentPage: page - 1,
+                this.setState(prevState => ({
+                    movies: [...prevState.movies, ...results],
+                    currentPage: page,
                     pages: total_pages > 1000 ?
                         1000 : total_pages,
                     resultsMsg: !results.length ?
@@ -83,8 +88,14 @@ class App extends Component {
         text: target.value
     }), () => this.handleSearch(target.value))
 
-    handlePageChange = ({ selected }) => {
-        this.fetchMovies(this.state.text, selected + 1)
+    // handlePageChange = ({ selected }) => {
+    //     this.fetchMovies(this.state.text, selected + 1)
+    // }
+
+    handlePageChange = () => {
+        const { currentPage } = this.state
+        
+        this.fetchMovies(this.state.text, currentPage + 1)
     }
 
     handleFilter = id => {
@@ -116,6 +127,7 @@ class App extends Component {
             text, 
             movies,
             pages,
+            currentPage,
             resultsMsg,
             genres,
             includeGenres
@@ -126,6 +138,9 @@ class App extends Component {
             movies.filter(({ genre_ids }) => genre_ids.some(id => includeGenres.includes(id)))
 
         document.body.style.overflow = 'auto'
+
+        console.log('pages', pages)
+        console.log('currentPage', currentPage)
 
         return (
             <div className="App">
@@ -153,11 +168,11 @@ class App extends Component {
                     )}
                 </div>
 
-                {pages > 1 &&
+                {/*pages > 1 &&
                     this.renderPaginate()
-                }
+                */}
 
-                {!!resultsMsg ?
+                {/*!!resultsMsg ?
                     <div className="__no-results">{resultsMsg}</div> :
                     <div className="__results">
                         {moviesByGenre.map(movie => <MovieResult
@@ -165,11 +180,25 @@ class App extends Component {
                             movie={movie}
                         />)}
                     </div>
-                }
+                */}
 
-                {pages > 1 &&
+                {/*pages > 1 &&
                     this.renderPaginate()
-                }
+                */}
+
+                <InfiniteScroll
+                    pageStart={currentPage}
+                    loadMore={this.handlePageChange}
+                    hasMore={pages > currentPage}
+                    loader={<div className="loader" key={0}>Loading ...</div>}
+                >
+                    <div className="__results">
+                        {moviesByGenre.map(movie => <MovieResult
+                            key={movie.id}
+                            movie={movie}
+                        />)}
+                    </div>
+            </InfiniteScroll>
             </div>
         )
     }

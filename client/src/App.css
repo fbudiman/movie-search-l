@@ -75,7 +75,7 @@
     border-color: #000;
 }
 
-.App > .__results {
+.App .__results {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
