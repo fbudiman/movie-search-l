@@ -16,21 +16,29 @@
 }
 
 .App > .__genres > div {
-    padding: 0.15rem 0.5rem;
+    padding: 0.45rem 0.5rem;
     border: 1px solid #CCCCCC;
-    margin: 0.2rem;
+    margin: 0.35rem;
     cursor: pointer;
+    transition: background 250ms ease-out;
+    border-radius: 5px;
+}
+
+.App > .__genres > div:hover {
+    background-color: #EAEAEA;
 }
 
 .App > .__genres > div.active {
-    border-color: #000;
+    background-color: #CCCCCC;
 }
 
 .App > .__search-input > input {
     width: 50%;
-    height: 1.25rem;
-    padding: 0.25rem;
+    height: 1rem;
+    padding: 0.65rem;
     font-size: 0.925rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
 }
 
 .App > .__search-input > span {

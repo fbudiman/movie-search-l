@@ -1,5 +1,6 @@
 // React
 import React from 'react'
+import { Link } from 'react-router-dom'
 // Services
 import { 
 	getMovie,
@@ -61,6 +62,8 @@ class Movie extends React.Component {
 		viewSimilar: !prevState.viewSimilar
 	}), this.fetchSimilar)
 
+	stopProp = e => e.stopPropagation()
+
   	render() {
   		const {
   			poster_path,
@@ -112,12 +115,20 @@ class Movie extends React.Component {
     				</div>
     			}
 
-	    		<div 
-	    			className="__button" 
-	    			onClick={this.toggleSimilar}
-	    		>
-	    			View similar movies
-	    		</div>
+				<div className="__buttons">
+					<div className="__button">
+						<Link to={`/`} onClick={e => this.stopProp(e)}>
+							Home
+						</Link>
+					</div>
+
+					<div 
+						className="__button" 
+						onClick={this.toggleSimilar}
+					>
+						View similar movies
+					</div>
+				</div>
 
     			{!_isEmpty(this.state.movie) &&
     				<div className="__body">

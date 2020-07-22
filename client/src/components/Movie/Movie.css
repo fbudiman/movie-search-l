@@ -16,18 +16,30 @@
 	margin: 2rem;
 }
 
-.Movie > .__button {
+.Movie > .__buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.Movie > .__buttons > .__button {
 	text-align: center;
 	width: 200px;
 	padding: 0.5rem;
-	margin: 1rem auto 0;
+	margin: 1rem 1rem 0;
 	border: 1px solid #CCCCCC;
+	border-radius: 5px;
 	cursor: pointer;
-	transition: border 250ms ease-in;
+	transition: background 250ms ease-in;
 }
 
-.Movie > .__button:hover {
-	border-color: #4C4C4C;
+.Movie > .__buttons > .__button:hover {
+	background-color: #CCCCCC;
+}
+
+.Movie > .__buttons a {
+	text-decoration: none;
+	color: black;
+	display: block;
 }
 
 .Movie > .__body {
@@ -87,7 +99,8 @@
 .Movie > .__body > .__details > .genre > div {
 	border: 1px solid #CCCCCC;
 	margin: 0.35rem 0.25rem 0 0;
-	padding: 0 0.25rem;
+	padding: 0rem 0.45rem 0.15rem;
+	border-radius: 4px;
 }
 
 .Movie > .__body > .__details > .summary {
