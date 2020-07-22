@@ -7,7 +7,7 @@ import {
     getGenres
 } from '../../services/movie'
 // Styles
-import './App.css'
+import './App.scss'
 // Components
 import MovieResult from '../../components/MovieResult/MovieResult'
 // Dependencies
@@ -107,7 +107,7 @@ class App extends Component {
         marginPagesDisplayed={1}
         pageRangeDisplayed={8}
         onPageChange={this.handlePageChange}
-        containerClassName={'__pagination'}
+        containerClassName={'App__pagination'}
         activeClassName={'--active'}
     />
 
@@ -131,7 +131,7 @@ class App extends Component {
             <div className="App">
                 <h2>Movie Search</h2>
 
-                <div className="__search-input">
+                <div className="App__search-input">
                     <input
                         type="text"
                         placeholder="Movie Titles..."
@@ -143,7 +143,7 @@ class App extends Component {
                     </span>
                 </div>
 
-                <div className="__genres">
+                <div className="App__genres">
                     {genres.map(genre => <div 
                         className={includeGenres.includes(genre.id) ? 'active' : ''}
                         key={genre.id}
@@ -158,8 +158,8 @@ class App extends Component {
                 }
 
                 {!!resultsMsg ?
-                    <div className="__no-results">{resultsMsg}</div> :
-                    <div className="__results">
+                    <div className="App__no-results">{resultsMsg}</div> :
+                    <div className="App__results">
                         {moviesByGenre.map(movie => <MovieResult
                             key={movie.id}
                             movie={movie}

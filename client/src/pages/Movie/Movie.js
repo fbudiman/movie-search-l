@@ -7,7 +7,7 @@ import {
 	getSimilar
 } from '../../services/movie'
 // Styles
-import './Movie.css'
+import './Movie.scss'
 // Components
 import MovieResult from '../../components/MovieResult/MovieResult'
 // Dependencies
@@ -103,7 +103,7 @@ class Movie extends React.Component {
 
     			{!!viewSimilar &&
     				<div 
-    					className="__similar"
+    					className="Movie__similar"
     					onClick={this.toggleSimilar}
     				>
     					<div className="__container">
@@ -115,7 +115,7 @@ class Movie extends React.Component {
     				</div>
     			}
 
-				<div className="__buttons">
+				<div className="Movie__buttons">
 					<div className="__button">
 						<Link to={`/`} onClick={e => this.stopProp(e)}>
 							Home
@@ -131,7 +131,7 @@ class Movie extends React.Component {
 				</div>
 
     			{!_isEmpty(this.state.movie) &&
-    				<div className="__body">
+    				<div className="Movie__body">
 		    			<div className="__poster">
 							{!!source ?
 		    					<img src={source} alt="Movie Poster" /> :

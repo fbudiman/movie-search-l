@@ -1,0 +1,37 @@
+.MovieResult {
+	margin: 1.25rem;
+	flex: 0;
+
+	& > a {
+		text-decoration: none;
+		color: #000;
+
+		.__poster {
+			transition: opacity 250ms ease-out;
+
+			&:hover {
+				opacity: 0.6;
+			}
+
+			img {
+				width: 150px;
+				height: 225px;
+			}
+
+			& > .--unavailable {
+				width: 148px;
+				height: 225px;
+				border: 1px solid #9B9B9B;
+				margin: 0 auto;
+				font-size: 0.925rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	}
+
+	& > div {
+		padding-top: 0.5rem;
+	}
+}

@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 // Styles
-import './MovieResult.css'
+import './MovieResult.scss'
 
 const base = 'https://image.tmdb.org/t/p/w200'
 
