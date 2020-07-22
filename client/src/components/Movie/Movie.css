@@ -75,7 +75,7 @@
 }
 
 .Movie > .__body > .__details > .title {
-	margin-bottom: 0.25rem;
+	margin: 0 0 0.5rem;
 }
 
 .Movie > .__body > .__details > .tagline {
@@ -99,7 +99,7 @@
 .Movie > .__body > .__details > .genre > div {
 	border: 1px solid #CCCCCC;
 	margin: 0.35rem 0.25rem 0 0;
-	padding: 0rem 0.45rem 0.15rem;
+	padding: 0.05rem 0.45rem 0.15rem;
 	border-radius: 4px;
 }
 
