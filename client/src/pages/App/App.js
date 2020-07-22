@@ -5,11 +5,11 @@ import {
     searchMovies,
     searchPopular,
     getGenres
-} from './services/movie'
+} from '../../services/movie'
 // Styles
 import './App.css'
 // Components
-import MovieResult from './components/MovieResult/MovieResult'
+import MovieResult from '../../components/MovieResult/MovieResult'
 // Dependencies
 import _debounce from 'lodash/debounce'
 import _cloneDeep from 'lodash/cloneDeep'

@@ -9,7 +9,7 @@ import {
 // Styles
 import './Movie.css'
 // Components
-import MovieResult from '../MovieResult/MovieResult'
+import MovieResult from '../../components/MovieResult/MovieResult'
 // Dependencies
 import moment from 'moment'
 import _isEmpty from 'lodash/isEmpty'

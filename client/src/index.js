@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 // Components
-import App from './App'
-import Movie from './components/Movie/Movie'
+import App from './pages/App/App'
+import Movie from './pages/Movie/Movie'
 // Styles
 import './index.css'
 // Service
